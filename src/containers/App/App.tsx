@@ -42,7 +42,31 @@ class App extends Component {
     this.setState({ 
       loading: true,
       breweries: [] 
-    });
+    }, () => {
+      fetch(URL)
+      .then(res => res.json())
+      .then(data => {
+        // If city exists, update weather details
+        if(data) {
+          console.log(data);
+          this.setState({
+            breweries: [ data ],
+            loading: false
+          });
+        } else {
+          // If city doesn't exist, throw error
+          throw data.cod
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          loading: false,
+          error: true
+        });
+      });
+    })
+
   }
 
   render() {
@@ -53,6 +77,8 @@ class App extends Component {
       cardContent = <RingLoader />;
     } else if ( this.state.error ) {
       cardContent = <p>Uh Oh!</p>;
+    } else if ( this.state.breweries.length > 0 ) {
+      cardContent = <p>{ this.state.breweries.toString() }</p>
     }
 
     return (
