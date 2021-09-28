@@ -51,7 +51,7 @@ class App extends Component {
         if(data) {
           console.log(data);
           this.setState({
-            breweries: [ data ],
+            breweries: data,
             loading: false
           });
         } else {
@@ -80,7 +80,7 @@ class App extends Component {
       cardContent = <p>Uh Oh!</p>;
     } else if ( this.state.breweries.length > 0 ) {
       cardContent = <BreweryList 
-        breweries={ this.state.breweries }
+        breweries={ this.state.breweries } 
         city={ this.state.searchBarInput } />
     }
 

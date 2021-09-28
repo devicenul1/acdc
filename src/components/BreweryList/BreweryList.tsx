@@ -2,7 +2,8 @@ import React from 'react'
 
 import classes from './BreweryList.module.scss';
 
-const BreweryList = (props: { breweries: Array<any>; city: string; }) => {
+const BreweryList = (props: { breweries: Array<any>; city: string; }) => {   
+
     return(
         <div className={ classes.BreweryListWrapper }>
             <table className={ classes.Table } summary={`List of breweries in ${ props.city } `}>
