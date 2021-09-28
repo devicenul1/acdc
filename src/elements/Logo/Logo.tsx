@@ -1,7 +1,7 @@
 import React from 'react'
 
 import classes from './Logo.module.scss';
-import logoSvg from 'elements/logo.svg';
+import logoSvg from './logo.svg';
 
 const logo = (props: { colorScheme: string; clicked: React.MouseEventHandler<HTMLHeadingElement> | undefined; }) => {
     let logoWithColorScheme = [
@@ -9,9 +9,12 @@ const logo = (props: { colorScheme: string; clicked: React.MouseEventHandler<HTM
         (props.colorScheme === 'dark') ? classes.Dark : classes.Light
     ];
     return(
-        <p className={ logoWithColorScheme.join(' ') } onClick={ props.clicked }>
-            andculture Development Challenge <img src={ logoSvg } className={ classes.logo } alt="logo" />
-        </p>
+        <div>
+            <p className={ logoWithColorScheme.join(' ') } onClick={ props.clicked }>
+                andculture Development Challenge 
+            </p>
+            <img src={ logoSvg } className={ classes.logo } alt="logo" />
+        </div>
     );
 }
 

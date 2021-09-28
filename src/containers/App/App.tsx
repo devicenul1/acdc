@@ -2,9 +2,10 @@ import { Component } from 'react';
 
 import classes from './App.module.scss';
 import Header from 'components/Header/Header';
-
+import SearchBar from 'components/SearchBar/SearchBar';
 import Card from 'elements/Card/Card';
 import Preview from 'components/Preview/Preview';
+import { RingLoader } from 'react-spinners';
 
 import Footer from 'components/Footer/Footer';
 
@@ -14,57 +15,44 @@ class App extends Component {
   state = {
     loading: false,
     error: false,
-    breweries: [
-      {
-        id: 299,
-        name: "Almanac Beer Company",
-        brewery_type: "micro",
-        street: "651B W Tower Ave",
-        address_2: null,
-        address_3: null,
-        city: "Alameda",
-        state: "California",
-        county_province: null,
-        postal_code: "94501-5047",
-        country: "United States",
-        longitude: "-122.306283180899",
-        latitude: "37.7834497667258",
-        phone: "4159326531",
-        website_url: "http://almanacbeer.com",
-        updated_at: "2018-08-23T23:24:11.758Z",
-        created_at: "2018-08-23T23:24:11.758Z"
-      }
-    ],
-    brewery: [
-      {
-        id: 12432,
-        obdb_id: "madtree-brewing-cincinnati",
-        name: "MadTree Brewing",
-        brewery_type: "regional",
-        street: "3301 Madison Rd",
-        address_2: null,
-        address_3: null,
-        city: "Cincinnati",
-        state: "Ohio",
-        county_province: null,
-        postal_code: "45209-1132",
-        country: "United States",
-        longitude: "-84.4239715",
-        latitude: "39.1563725",
-        phone: "5138368733",
-        website_url: "http://www.madtreebrewing.com",
-        updated_at: "2018-07-24T00:00:00.000Z",
-        created_at: "2018-07-24T00:00:00.000Z"
-      }
-    ]
+    searchBarInput: '',
+    breweries: []
   };
+
+  // preserve state for defaults
+  baseState = this.state;
+
+  // Update state with current search bar input
+  searchBarHandler = (e: any) => {
+    this.setState({
+      searchBarInput: e.target.value
+    })
+  }
+
+  // onClick handler for SearchBar
+  searchBreweriesByCity = (event: any) => {
+    // don't allow our form to post back
+    event.preventDefault();
+
+    const city = this.state.searchBarInput;
+    const API_URL = 'https://api.openbrewerydb.org/breweries';
+    const URL = API_URL + `?by_city=${city}`;
+
+    // reset our state
+    this.setState({ 
+      loading: true,
+      breweries: [] 
+    });
+  }
 
   render() {
 
     // conditionally render card content
     let cardContent = <Preview />
-    if (this.state.loading) {
-
+    if ( this.state.loading ) {
+      cardContent = <RingLoader />;
+    } else if ( this.state.error ) {
+      cardContent = <p>Uh Oh!</p>;
     }
 
     return (
@@ -72,6 +60,12 @@ class App extends Component {
         <Header 
           color="blueviolet" 
           onClickHandler={ () => void undefined } />
+
+        <SearchBar
+          value={ this.state.searchBarInput }
+          onChangeHandler={ this.searchBarHandler }
+          onClickHandler={ this.searchBreweriesByCity }
+          error={ this.state.error } />
 
         <Card>
           { cardContent }
@@ -84,19 +78,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-/* <header className={ classes.header } >
-
-<p>
-  Edit <code>src/App.tsx</code> and save to reload.
-</p>
-<a
-  className="App-link"
-  href="https://reactjs.org"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Learn React
-</a>
-</header> */
