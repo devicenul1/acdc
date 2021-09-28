@@ -25,3 +25,5 @@ const BreweryList = (props: { breweries: Array<any>; city: string; }) => {
         </div>
     );
 }
+
+export default BreweryList;

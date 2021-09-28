@@ -6,6 +6,7 @@ import SearchBar from 'components/SearchBar/SearchBar';
 import Card from 'elements/Card/Card';
 import Preview from 'components/Preview/Preview';
 import { RingLoader } from 'react-spinners';
+import BreweryList from 'components/BreweryList/BreweryList';
 
 import Footer from 'components/Footer/Footer';
 
@@ -78,7 +79,9 @@ class App extends Component {
     } else if ( this.state.error ) {
       cardContent = <p>Uh Oh!</p>;
     } else if ( this.state.breweries.length > 0 ) {
-      cardContent = <p>{ this.state.breweries.toString() }</p>
+      cardContent = <BreweryList 
+        breweries={ this.state.breweries }
+        city={ this.state.searchBarInput } />
     }
 
     return (
