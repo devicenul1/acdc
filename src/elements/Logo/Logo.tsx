@@ -10,7 +10,7 @@ const logo = (props: { colorScheme: string; clicked: React.MouseEventHandler<HTM
     ];
     return(
         <p className={ logoWithColorScheme.join(' ') } onClick={ props.clicked }>
-            andculture Design Challenge <img src={ logoSvg } className={ classes.logo } alt="logo" />
+            andculture Development Challenge <img src={ logoSvg } className={ classes.logo } alt="logo" />
         </p>
     );
 }
