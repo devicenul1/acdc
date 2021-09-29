@@ -1,10 +1,12 @@
 import React from "react";
-import { match } from "react-router-dom";
+import { match, RouteComponentProps } from "react-router-dom";
 
 import defaultView from 'views/Brewery/default';
 import singleView from 'views/Brewery/single';
 
-export type BreweryProps = { match: any };
+interface BreweryProps extends RouteComponentProps {
+    match: match<{ id: string }>;
+};
 
 class BreweryController extends React.Component<BreweryProps> {
 
