@@ -1,13 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'index.module.scss';
-import App from 'containers/App/App';
+import classes from 'index.module.scss';
 import * as serviceWorkerRegistration from 'elements/serviceWorkerRegistration';
 // import reportWebVitals from 'reportWebVitals';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
+
+import BreweryController from "controllers/BreweryController";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <div className={ classes.App }>
+        <Header 
+            color="blueviolet" 
+            onClickHandler={ () => void undefined } 
+        />
+
+        <Switch>
+            <Route path="/" exact >
+                <Redirect to='/Breweries' />
+            </Route>
+            <Route path="/Breweries" component={ BreweryController } />
+        </Switch>
+
+        <Footer color="blueviolet" />
+      </div>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

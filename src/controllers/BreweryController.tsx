@@ -1,37 +1,31 @@
-import { Component } from 'react';
+import React from "react";
 
-import classes from './App.module.scss';
-import Header from 'components/Header/Header';
 import SearchBar from 'components/SearchBar/SearchBar';
 import Card from 'elements/Card/Card';
 import Preview from 'components/Preview/Preview';
 import { RingLoader } from 'react-spinners';
-import BreweryList from 'components/BreweryList/BreweryList';
+import Table from 'elements/Table/Table';
 
-import Footer from 'components/Footer/Footer';
+export type BreweryProps = { state: Array<any> };
 
-class App extends Component {
+class BreweryController extends React.Component<BreweryProps> {
 
-  // global app state
-  state = {
-    loading: false,
-    error: false,
-    searchBarInput: '',
-    breweries: []
-  };
+    state = {
+        loading: false,
+        error: false,
+        searchBarInput: '',
+        breweries: []
+    };
 
-  // preserve state for defaults
-  baseState = this.state;
+    // Update state with current search bar input
+    searchBarHandler = (e: any) => {
+        this.setState({
+        searchBarInput: e.target.value
+        })
+    }
 
-  // Update state with current search bar input
-  searchBarHandler = (e: any) => {
-    this.setState({
-      searchBarInput: e.target.value
-    })
-  }
-
-  // onClick handler for SearchBar
-  searchBreweriesByCity = (event: any) => {
+    // onClick handler for SearchBar
+    searchBreweriesByCity = (event: any) => {
     // don't allow our form to post back
     event.preventDefault();
 
@@ -70,6 +64,7 @@ class App extends Component {
 
   }
 
+  // default view rednerer
   render() {
 
     // conditionally render card content
@@ -79,17 +74,13 @@ class App extends Component {
     } else if ( this.state.error ) {
       cardContent = <p>Uh Oh!</p>;
     } else if ( this.state.breweries.length > 0 ) {
-      cardContent = <BreweryList 
-        breweries={ this.state.breweries } 
-        city={ this.state.searchBarInput } />
+      cardContent = <Table 
+        dataset={ this.state.breweries } 
+        title={ this.state.searchBarInput } />
     }
 
     return (
-      <div className={ classes.App } >
-        <Header 
-          color="blueviolet" 
-          onClickHandler={ () => void undefined } />
-
+      <div>
         <SearchBar
           value={ this.state.searchBarInput }
           onChangeHandler={ this.searchBarHandler }
@@ -100,10 +91,10 @@ class App extends Component {
           { cardContent }
         </Card>
 
-        <Footer color="blueviolet" />
+        
       </div>
     );
   }
 }
 
-export default App;
+export default BreweryController;

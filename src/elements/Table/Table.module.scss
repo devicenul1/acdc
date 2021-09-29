@@ -1,4 +1,4 @@
-.BreweryListWrapper {
+.TableWrapper {
     width: 100%;
 }
 
@@ -10,4 +10,11 @@
 .Table caption {
     font-size: 1.875rem;
     line-height: 4rem;
+}
+
+.TotalObjects {
+    text-align: right;
+    font-size: small;
+    padding-right: 1rem;
+    color: blueviolet;
 }
