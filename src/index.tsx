@@ -13,17 +13,17 @@ import BreweryController from "controllers/BreweryController";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <div className={ classes.App }>
-        <Header 
-            color="blueviolet" 
-            onClickHandler={ () => void undefined } 
+      <div className={classes.App}>
+        <Header
+          color="blueviolet"
+          onClickHandler={() => void undefined}
         />
 
         <Switch>
-            <Route path="/" exact >
-                <Redirect to='/Breweries' />
-            </Route>
-            <Route path="/Breweries" component={ BreweryController } />
+          <Route path="/" exact >
+            <Redirect to='/Breweries' />
+          </Route>
+          <Route path="/Breweries/:id?" component={BreweryController} />
         </Switch>
 
         <Footer color="blueviolet" />

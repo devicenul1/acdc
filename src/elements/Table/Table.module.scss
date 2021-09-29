@@ -3,13 +3,27 @@
 }
 
 .Table {
-    padding: 2rem;
+    padding: 1rem;
     width: 100%;
+    display: table;
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: #aca9b8d0;
+        }
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    }
 }
 
 .Table caption {
     font-size: 1.875rem;
     line-height: 4rem;
+    text-align: left;
+    padding-left: 1rem;
 }
 
 .TotalObjects {
