@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import iBrewery from 'interfaces/iBrewery';
 
 const instance = axios.create({
-    baseURL: 'https://api.openbrewerydb.org/'
+    baseURL: process.env.REACT_APP_OPEN_BREWERY_DB_BASE_URL
 });
 
 const responseBody = (response: AxiosResponse) => response.data;
