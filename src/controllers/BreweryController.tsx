@@ -1,21 +1,32 @@
 import React from "react";
 import { match, RouteComponentProps } from "react-router-dom";
 
+import iBrewery from "interfaces/iBrewery";
+import { Breweries } from "models/BreweryApiService";
+
 import defaultView from 'views/Brewery/default';
 import singleView from 'views/Brewery/single';
 
-interface BreweryProps extends RouteComponentProps {
+interface iBreweryProps extends RouteComponentProps {
     match: match<{ id: string }>;
 };
 
-class BreweryController extends React.Component<BreweryProps> {
+interface iBreweryState {
+    loading: boolean,
+    error: boolean,
+    searchBarInput: string,
+    breweries: Array<iBrewery>
+}
 
+class BreweryController extends React.Component<iBreweryProps, iBreweryState> {
+
+    // set our default state
     state = {
         loading: false,
         error: false,
         searchBarInput: '',
         breweries: []
-    };
+    } as iBreweryState;
 
     // Update state with current search bar input
     searchBarHandler = (e: any) => {
@@ -30,28 +41,17 @@ class BreweryController extends React.Component<BreweryProps> {
         event.preventDefault();
 
         const city = this.state.searchBarInput;
-        const API_URL = 'https://api.openbrewerydb.org/breweries';
-        const URL = API_URL + `?by_city=${city}`;
 
         // reset our state
         this.setState({
             loading: true,
-            breweries: []
         }, () => {
-            fetch(URL)
-                .then(res => res.json())
-                .then(data => {
-                    // If city exists, update weather details
-                    if (data) {
-                        console.log(data);
-                        this.setState({
-                            breweries: data,
-                            loading: false
-                        });
-                    } else {
-                        // If city doesn't exist, throw error
-                        throw data.cod
-                    }
+            Breweries.getBreweriesByCity(city)
+                .then((data) => {
+                    this.setState({
+                        loading: false,
+                        breweries: data
+                    })
                 })
                 .catch(err => {
                     console.log(err);
@@ -65,7 +65,10 @@ class BreweryController extends React.Component<BreweryProps> {
 
     render() {
         if (this.props.match.params.id) {
-            return singleView(this);
+            var brewery = this.state.breweries.find((brewery) =>
+                brewery.id === Number(this.props.match.params.id));
+
+            return singleView(brewery ? brewery : null);
         }
 
         return defaultView(this);

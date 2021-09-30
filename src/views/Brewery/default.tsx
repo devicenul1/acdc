@@ -6,7 +6,7 @@ import Preview from 'components/Preview/Preview';
 import { RingLoader } from 'react-spinners';
 import Table from 'elements/Table/Table';
 
-export default (component: BreweryController) => {
+const breweryView = (component: BreweryController) => {
 
     let cardContent = <Preview />
     if (component.state.loading) {
@@ -30,8 +30,8 @@ export default (component: BreweryController) => {
             <Card>
                 {cardContent}
             </Card>
-
-
         </div>
     );
 }
+
+export default breweryView;

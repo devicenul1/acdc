@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import classes from './Table.module.scss';
 
@@ -17,10 +18,13 @@ const Table = (props: { dataset: Array<any>; title: string; }) => {
                 <tbody>
                     {props.dataset.map((set, index) => (
                         <tr data-index={index}>
-                            <a href={`/Breweries/${set.id}`}>
+                            <Link to={{
+                                pathname: `/Breweries/${set.id}`,
+                                state: props.dataset
+                            }}>
                                 <td>{set.name}</td>
                                 <td>{set.street}</td>
-                            </a>
+                            </Link>
                         </tr>
                     ))}
                 </tbody>
