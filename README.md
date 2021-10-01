@@ -1,4 +1,21 @@
+# React App
+Created using the create-react-app typescript template, the build and 
 
+## Development
+Just running npm ci and npm start run should get the react app up and running, hosted on a local server that should bring up your default browser. 
+
+``` bash
+npm ci 
+npm run start
+```
+
+## Production
+
+
+``` bash
+npm ci
+npm run build
+```
 
 # Heroku
 
