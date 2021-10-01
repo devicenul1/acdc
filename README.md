@@ -1,5 +1,5 @@
 # React App
-Created using the create-react-app typescript template, the build and 
+Created using the (https://create-react-app.dev/docs/adding-typescript/)[create-react-app] typescript template, the build process uses their react-scripts. The package (https://reactrouter.com/web/guides/quick-start)[react-router-dom] was used to give the app some general URL routing and redirect to the /Breweries url (the only working page). (https://github.com/sheaivey/react-axios)[Axios] is used to help manage the HTTPClient requests for outside service calls, the service call URLs are defined in .env files and injected into the production builds via dockerfiles. Following the MVC pattern the app routes to a controller which controls the views, modeled the app routes / views after the Open Brewery DB calls. The views are just JSX templates wrapped in a function. Components / Elements are the other folders, seemed like a logical grouping of things, components being custom React components and elements just HTML "reactified". Interfaces folder is used to hold some models to more tightly type cast the app.
 
 ## Development
 Just running npm ci and npm start run should get the react app up and running, hosted on a local server that should bring up your default browser. 
