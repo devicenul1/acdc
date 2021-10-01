@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classes from 'index.module.scss';
-import * as serviceWorkerRegistration from 'elements/serviceWorkerRegistration';
+import * as serviceWorkerRegistration from 'serviceWorkerRegistration';
 // import reportWebVitals from 'reportWebVitals';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
