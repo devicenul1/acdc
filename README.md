@@ -36,7 +36,7 @@ Server side routing needs to be fixed, hitting the app's root URL works fine, bu
 
 # API
 
-Built with Ruby and sinatra, a lightweight mock api for changing out the rest service. To switch the React app over to the local api, docker build the api and run it, then switch the React's .env.development variable for REACT_APP_OPEN_BREWERY_DB_BASE_URL.
+Built with Ruby and sinatra, a lightweight mock api for changing out the rest service. To switch the React app over to the local api, docker build the api and run it, then uncomment the React's .env.development variable for REACT_APP_OPEN_BREWERY_DB_BASE_URL.
 
 ```bash
 docker build -t api.acdc .
