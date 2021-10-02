@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  web:
+    build: ./web
+    container_name: web.acdc
+    networks:
+      - backend
+    ports:
+      - 8080:80
+    environment:
+      PORT: 80
+
+  api:
+    build: ./api
+    container_name: api.acdc
+    ports:
+      - 44302:4567
+    networks:
+      - backend
+    environment:
+      ENV: development
+networks:
+  backend:

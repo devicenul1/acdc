@@ -33,3 +33,12 @@ heroku container:release web --app ${YOUR_APP_NAME}
 ## Known issues
 
 Server side routing needs to be fixed, hitting the app's root URL works fine, but if your browsing directly to /Breweries it will 404.
+
+# API
+
+Built with Ruby and sinatra, a lightweight mock api for changing out the rest service. To switch the React app over to the local api, docker build the api and run it, then switch the React's .env.development variable for REACT_APP_OPEN_BREWERY_DB_BASE_URL.
+
+```bash
+docker build -t api.acdc .
+docker run -it --rm --name api.acdc -p 44302:4567 api.acdc
+```

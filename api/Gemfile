@@ -1,0 +1,9 @@
+source "http://rubygems.org"
+
+#gem "puma"
+#gem "reel"
+#gem "http"
+#gem "webrick"
+# gem "eventmachine"
+# gem "thin"
+gem "sinatra"
