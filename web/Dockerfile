@@ -13,5 +13,5 @@ RUN npm ci && \
 FROM nginx:alpine
 COPY --from=builder /drop/build /usr/share/nginx/html
 
-# for heroku
+# for heroku hosting
 COPY ./nginx/default.conf.template /etc/nginx/templates/default.conf.template
